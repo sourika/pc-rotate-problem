@@ -20,7 +20,30 @@ class Node:
 
 def rotate(head, k):
     # Your implementation here!
-    pass
+    if head is None or head.next is None:
+        return head
+
+    length = 1
+    tail = head
+    while tail.next is not None:
+        tail = tail.next
+        length += 1
+
+    k = k % length
+    if k == 0:
+        return head
+
+    steps_to_new_tail = length - k - 1
+    new_tail = head
+    for _ in range(steps_to_new_tail):
+        new_tail = new_tail.next
+
+    new_head = new_tail.next
+
+    new_tail.next = None
+    tail.next = head
+
+    return new_head
 
 
 # Input list: a->b->c->d->e
